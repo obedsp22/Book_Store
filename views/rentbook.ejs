@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+<body>
+    <%- include('addloan.ejs') %>
+    <%- include('partials/about.ejs') %>
+
+    <header>
+        <%- include('partials/navigation.ejs') %>
+    </header>
+
+    <div class="container" id="container">
+        <h1>Rent One Of Our Books</h1>
+
+        <div class="row mt-3">
+            <% if(books.length == 0) { %>
+                <div class="alert alert-warning p-4 col-md">No books available.</div>
+            <% } else { %>
+            <% books.forEach(book => { %>
+                <div class="col-md-3 my-3 p-3">
+                    <div class="card text-center">
+                        <img src="/imagesdb/<%= book.Cover %>" alt="Book Cover" height="300">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= book.Title %></h5>
+                            <p class="card-text">Author: <%= book.Author %></p>
+                            <p class="card-text">Genre: <%= book.Genre %></p>
+                            <% if(book.isBorrowed == 'Available') { %>
+                                <button class="btn btn-warning" onclick="rentBook(<%= JSON.stringify(book) %>)">Rent Book</button>
+                            <% } else { %>
+                                <p>Book Borrowed</p>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% }); } %>
+        </div>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+    <script src="/javascripts/script.js"></script>
+    <script src="/javascripts/loans.js"></script>
+</body>
+
+</html>

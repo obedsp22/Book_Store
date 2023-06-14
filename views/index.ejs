@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+<body>
+    <%- include('addloan.ejs') %>
+    <%- include('partials/about.ejs') %>
+        
+    <header>
+        <%- include('partials/navigation.ejs') %>
+        <div id="main">
+            <div id="vertical-center" class="text-center">
+                <h1 class="text-white">Explore All Kinds of Books to Read</h1>
+                <a href="/rentabook" class="btn btn-light">Start <i class="bi bi-book-half" style="color: yellow;"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="mt-4 text-center">Best Sellers</h1>
+        <!-- Books here -->
+        <div class="row my-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <img src="/images/identity.jpg" alt="Book Cover" height="300">
+                        <div class="card-body">
+                            <h5 class="card-title">Identity</h5>
+                            <p class="card-text">Author: Nora Roberts</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <img src="/images/forthwing.jpg" alt="Book Cover" height="300">
+                        <div class="card-body">
+                            <h5 class="card-title">Fourth Wing</h5>
+                            <p class="card-text">Author: Rebbecca Yarros</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <img src="/images/ironflame.jpg" alt="Book Cover" height="300">
+                        <div class="card-body">
+                            <h5 class="card-title">Iron Flame</h5>
+                            <p class="card-text">Author: Rebbecca Yarros</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <img src="/images/only-the-dead.jpg" alt="Book Cover" height="300">
+                        <div class="card-body">
+                            <h5 class="card-title">Only The Dead</h5>
+                            <p class="card-text">Author: Jack Carr</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+    <script src="/javascripts/script.js"></script>
+    <script src="/javascripts/loans.js"></script>
+</body>
+
+</html>

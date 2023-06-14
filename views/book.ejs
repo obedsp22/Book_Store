@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+    <body>
+        <div id="modal">
+            <div id="modalBody">
+                <div class="fs-2">Edit Book</div>
+                <hr>
+                <div>
+                    <form id="editbookForm">
+                        <div class="form-group">
+                            <label for="Title">Title</label>
+                            <input type="text" class="form-control" id="utitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="Author">Author</label>
+                            <input type="text" class="form-control" id="uauthor">
+                        </div>
+                        <div class="form-group">
+                            <label for="Genre">Title</label>
+                            <select class="form-control" id="ugenre">
+                                <option value="">Choose...</option>
+                                <option value="Fiction">Fiction</option>
+                                <option value="Science-Fiction">Science-Fiction</option>
+                                <option value="Mystery">Mystery</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Non-Fiction">Non-Fiction</option>                                
+                            </select>
+                        </div> 
+                        <input type="text" id="uid" hidden>                                               
+                    </form>
+                    <hr>
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-secondary" onclick="closeM()">Close</button>
+                        <button type="submit" class="btn btn-primary" onclick="saveEditBook(event)">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('addloan.ejs') %>
+        <%- include('partials/about.ejs') %>
+
+        <header>
+            <%- include('partials/navigation.ejs') %>
+        </header>
+
+        <div id="allbooks">
+            <aside class="container">
+                <div class="aside">
+                    <h2>Our Books</h2>
+                    <ul style="list-style-type: disc;">
+                        <% if(books.length == 0) { %>
+                            <li>No Books available</li>
+                        <% } else { %>
+                        <% books.forEach(book => { %>
+                            <li><%= book.Genre %></li>
+                        <% }); } %>
+                    </ul>
+                </div>
+                <div class="aside">
+                    <h2>Authors</h2>
+                    <ul style="list-style-type: disc;">
+                        <% if(books.length == 0) { %>
+                            <li>No Books available</li>
+                        <% } else { %>
+                        <% books.forEach(book => { %>
+                            <li><%= book.Author %></li>
+                        <% }); } %>                        
+                    </ul>
+                </div>
+                <div class="aside">
+                    <h2>Search</h2>
+                    <input type="text" id="bookSearch" placeholder="Search here...">
+                    <button class="mt-2" onclick="searchBook()">Search</button>
+                    <div>
+                        <div>
+                            <input type="radio" name="filter" value="Title" checked>
+                            <label for="bookFilter">By Title</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="filter" value="Author">
+                            <label for="bookFilter">By Author</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="filter" value="Genre">
+                            <label for="bookFilter">By Genre</label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <div id="mainBooks">
+                <h1>All Books</h1>
+                <div class="row mt-3" id="mainpage">
+                    <% if(books.length == 0) { %>
+                        <p>No Books available</p>
+                    <% } else { %>
+                    <% books.forEach(book => { %>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="/imagesdb/<%= book.Cover %>" alt="Book Cover"  height="500">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= book.Title %></h5>
+                                    <p class="card-text">Author: <%= book.Author %></p>
+                                    <p class="card-text">Genre: <%= book.Genre %></p>
+                                    <div>
+                                        <a class="action" onclick="editBook(<%= JSON.stringify(book) %>)">Edit</a>
+                                        <a class="action" onclick="deleteBook(<%= book.BookId %>)">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); } %>                    
+                </div>
+                <div class="row mt-3" id="filteredPage"></div>
+            </div>
+        </div>
+
+        <%- include('partials/footer.ejs') %>
+        <script src="/javascripts/books.js"></script>
+        <script src="/javascripts/script.js"></script>
+        <script src="/javascripts/loans.js"></script>
+    </body>
+
+</html>

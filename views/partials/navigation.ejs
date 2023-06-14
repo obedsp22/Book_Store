@@ -1,0 +1,28 @@
+<nav>
+    <div id="mainTitle" class="fs-4" onclick="window.open('/', '_self')">Book Store</div>
+    <div class="navbar">
+        <a href="/rentabook">Rent a Book</a>
+        <div class="dropdown">
+            <button class="dropbtn">Books <i class="bi bi-caret-down-fill"></i></button>
+            <div class="dropdown-content">
+                <a href="/book/new">New Book</a>
+                <a href="/book">All Books</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Readers <i class="bi bi-caret-down-fill"></i></button>
+            <div class="dropdown-content">
+                <a href="/reader/new">New Reader</a>
+                <a href="/reader">All Readers</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Rent <i class="bi bi-caret-down-fill"></i></button>
+            <div class="dropdown-content">
+                <a onclick="showLoan()">New Loan</a>
+                <a href="/loan">All Loans</a>
+            </div>
+        </div>
+        <a onclick="showAbout()">About</a>
+    </div>
+</nav>

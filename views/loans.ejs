@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+<body>
+    <%- include('addloan.ejs') %>
+    <%- include('partials/about.ejs') %>
+
+    <div id="editRentModal">
+        <div id="rentBody">
+            <h1 class="mt-4 text-center">Edit Loan</h1>
+            <div>Loan Information</div>
+            <hr>
+            <form id="editRent">
+                <div class="row">
+                    <div class="form-group col-md">
+                        <label for="rentDt">Rent Date</label>
+                        <input type="date" class="form-control" id="urentDT" required>
+                    </div>
+                    <div class="form-group col-md">
+                        <label for="return">Return Date</label>
+                        <input type="date" class="form-control" id="ureturnDT" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md">
+                        <label for="Reader">Reader</label>
+                        <select name="reader" class="form-control" id="ureaders" required></select>
+                    </div>
+    
+                    <div class="form-group col-md">
+                        <label for="Book">Book</label>
+                        <select name="book" class="form-control" id="ubooks" required></select>
+                    </div>
+                </div>
+                <input type="text" id="uid" hidden>
+                <div class="mt-4">
+                    <button type="button" class="btn btn-warning" onclick="saveEditLoan(event)">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <header>
+        <%- include('partials/navigation.ejs') %>
+    </header>
+    
+    <div class="container" id="container">
+        <h1 class="text-center">All Rented</h1>
+        <hr>
+        <label for="search">Search</label>
+        <input type="date" id="loaninp" placeholder="Search">
+        <button onclick="searchLoan()">Search</button>
+        <div class="my-3">
+            <input type="radio" name="filter" value="LoanDate" checked>
+            <label for="">By Loan Date</label>
+            <input type="radio" name="filter" value="ReturnDate">
+            <label for="">By Return Date</label>
+        </div>
+        <div id="mainpage">
+            <% if(loans.length == 0) { %>
+                <div class="alert alert-warning mt-3 p-4 text-center">No loans found.</div>
+            <% } else { %>
+                <table class="table table-warning table-striped">
+                    <thead>
+                        <tr>
+                            <th>Rent Date</th>
+                            <th>Return Date</th>
+                            <th>Customer Name</th>
+                            <th>Movie Title</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% loans.forEach(loan => { %>
+                            <tr>
+                                <td><%= loan.LoanDate %></td>
+                                <td><%= loan.ReturnDate %></td>
+                                <td><%= loan.Title %></td>
+                                <td><%= loan.Name %> <%= loan.LastName %></td>
+                                <td><i class="bi bi-pencil-square" onclick="editLoan(<%= JSON.stringify(loan) %>)"></i> <i class="bi bi-trash3" onclick="deleteLoan(<%= JSON.stringify(loan) %>)"></i></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+        <div id="filteredpage" style="display: none;">
+            <table class="table table-warning table-striped">
+                <thead>
+                    <tr>
+                        <th>Rent Date</th>
+                        <th>Return Date</th>
+                        <th>Customer Name</th>
+                        <th>Movie Title</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="loan_tbody"></tbody>
+            </table>
+        </div>
+    </div>
+    
+    <%- include('partials/footer.ejs') %>
+    <script src="/javascripts/loans.js"></script>
+    <script src="/javascripts/script.js"></script>
+    <script>
+    window.onload = function () {
+        getBooks_();
+        getReaders_();
+    }
+
+    const getBooks_ = () => {
+        fetch('/loan/editbooks')
+        .then(response => response.json())
+        .then(data => {
+            printBook_(data);
+        });
+    }
+
+    function printBook_(books) {
+        let options = '';
+        if (books.length == 0) options = '<option value="">No books found.</option>';
+        books.forEach(b => {
+        options += `
+            <option value="${b.BookId}">${b.Title}</option>
+        `;
+        });
+        document.getElementById('ubooks').innerHTML = options;
+    }
+
+    const getReaders_ = () => {
+        fetch('/loan/editreaders')
+        .then(response => response.json())
+        .then(data => {
+            printReader_(data);
+        });
+    }
+
+    function printReader_(readers) {
+        let options = '';
+        if (readers.length == 0) options = '<option value="">No readers found.</option>';
+        readers.forEach(r => {
+        options += `
+            <option value="${r.ReadId}">${r.Name} ${r.LastName}</option>
+        `;
+        });
+        document.getElementById('ureaders').innerHTML = options;
+    }        
+    </script>
+</body>
+
+</html>

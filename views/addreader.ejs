@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+    <body>
+        <%- include('addloan.ejs') %>
+        <%- include('partials/about.ejs') %>
+
+        <header>
+            <%- include('partials/navigation.ejs') %>
+        </header>
+
+        <div class="container" id="container">
+            <h1 class="mt-4 text-center">Add Customer</h1>
+            <div>Reader Information</div>
+            <hr>
+            <div class="row mt-5">
+                <div class="col-md-5 offset-md-4">
+                    <form id="readerform">
+                        <div class="form-group">
+                            <label for="fname">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname">Last Name</label>
+                            <input type="text" class="form-control" id="lname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" class="form-control" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Pattern: 123-456-7890" placeholder="123-456-7890" required>
+                        </div> 
+                        <div>
+                            <button class="mt-5 btn btn-warning" type="button" onclick="addReader(event)">Submit</button>
+                        </div>                                                                       
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <%- include('partials/footer.ejs') %>
+        <script src="/javascripts/readers.js"></script>
+        <script src="/javascripts/script.js"></script>
+        <script src="/javascripts/loans.js"></script>
+    </body>
+
+</html>

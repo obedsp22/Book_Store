@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+    <body>
+        <%- include('addloan.ejs') %>
+        <%- include('partials/about.ejs') %>
+                
+        <header>
+            <%- include('partials/navigation.ejs') %>
+        </header>
+
+        <div class="container" id="container">
+            <h1 class="mt-4 text-center">Add Book</h1>
+            <div>Book Information</div>
+            <hr>
+            <div class="row mt-5">
+                <div class="col-md-5 offset-md-4">
+                    <form id="bookform">
+                        <div class="form-group">
+                            <div id="cover"></div>
+                            <label for="cover">Cover</label>
+                            <input type="file" class="form-control w-50" id="file" required>
+                        </div>
+                        <div class="">
+                            <div class="form-group">
+                                <label for="title">Book Title</label>
+                                <input type="text" id="title" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="author">Book Author</label>
+                                <input type="text" id="author" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Genre">Book Genre</label>
+                                <select name="genre" id="genre" class="form-control" required>
+                                    <option value="">Choose...</option>
+                                    <option value="Fiction">Fiction</option>
+                                    <option value="Science-Fiction">Science-Fiction</option>
+                                    <option value="Mystery">Mystery</option>
+                                    <option value="Thriller">Thriller</option>
+                                    <option value="Non-Fiction">Non-Fiction</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="mt-5 btn btn-warning" type="button" onclick="addBook(event)">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <%- include('partials/footer.ejs') %>
+
+        <script>
+            window.onload = function () {
+                let fileInput = document.getElementById('file');
+
+                function onchange(e) {
+                    let imgs = document.querySelector('img');
+                    
+                    var file = e.target.files[0];
+                    var imageType = /image.*/;
+                    if (file.type.match(imageType)) {
+                        var reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function (e) {
+                            let portrait = document.getElementById('cover');
+                            portrait.innerHTML = '';
+                            var image = new Image(280, 300);
+                            image.style.borderRadius = '5px';
+                            image.src = reader.result;
+                            portrait.append(image);
+                        }
+                    }
+                    else
+                        alert('File not supported. Please choose an image file.');
+                };
+
+                fileInput.addEventListener("change", onchange);
+            }
+        </script>
+        <script src="/javascripts/books.js"></script>
+        <script src="/javascripts/script.js"></script>
+        <script src="/javascripts/loans.js"></script>
+    </body>
+
+</html>

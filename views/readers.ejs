@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+    <body>
+        <%- include('addloan.ejs') %>
+        <%- include('partials/about.ejs') %>
+        
+        <div id="modal">
+            <div id="modalBody">
+                <div class="fs-2">Edit Reader</div>
+                <hr>
+                <div>
+                    <form id="editreaderForm">
+                        <div class="form-group">
+                            <label for="fname">First Name:</label>
+                            <input type="text" class="form-control" id="uname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname">Last Name:</label>
+                            <input type="text" class="form-control" id="ulname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" class="form-control" id="uaddress" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" class="form-control" id="uphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Pattern: 123-456-7890" placeholder="123-456-7890" required>
+                        </div>
+                        <input type="text" id="uid" hidden>                                                
+                    </form>
+                    <hr>
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-secondary" onclick="saveEditReader(event)">Save Changes</button>
+                        <button type="submit" class="btn btn-primary" onclick="closeM()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <%- include('partials/navigation.ejs') %>
+        </header>
+
+        <div class="container" id="container">
+            <h1 class="text-center">All Readers</h1>
+            <hr>
+            <label for="search">Search Reader:</label>
+            <input type="text" id="readerinp" placeholder="Search">
+            <button onclick="searchReader()">Search</button>
+            <div class="my-3">
+                <div>
+                    <input type="radio" name="filter" value="Name" checked>
+                    <label for="filter">By First name</label> 
+                    <input type="radio" name="filter" value="LastName">
+                    <label for="filter">By Last name</label> 
+                    <input type="radio" class="ms-3" name="filter" value="Phone">
+                    <label for="filter">By Phone</label>
+                </div>
+            </div>
+            <div id="mainpage">
+                <% if (readers.length == 0) { %>
+                    <div class="alert alert-warning mt-3 p-4 text-center">No Readers have been added.</div> 
+                <% } else { %>
+                    <table class="table table-warning table-striped">
+                        <thead>
+                            <tr>
+                                <th>Reader ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% readers.forEach(reader => { %>
+                                <tr>
+                                    <td><%= reader.ReadId %></td>
+                                    <td><%= reader.Name %></td>
+                                    <td><%= reader.LastName %></td>
+                                    <td><%= reader.Address %></td>
+                                    <td><%= reader.Phone %></td>
+                                    <td><i class="bi bi-pencil-square" onclick="editReader(<%= JSON.stringify(reader) %>)"></i> <i class="bi bi-trash3" onclick="deleteReader(<%= reader.ReadId %>)"></i></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table> 
+                <% } %>
+            </div>
+            <div id="filteredpage" style="display: none;">
+                <table class="table table-warning table-striped">
+                    <thead>
+                        <tr>
+                            <th>Reader ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="read_tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <%- include('partials/footer.ejs') %>
+        <script src="/javascripts/readers.js"></script>
+        <script src="/javascripts/script.js"></script>
+        <script src="/javascripts/loans.js"></script>
+    </body>
+
+</html>
