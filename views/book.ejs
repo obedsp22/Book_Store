@@ -33,8 +33,8 @@
                     </form>
                     <hr>
                     <div class="text-center mt-4">
-                        <button type="button" class="btn btn-secondary" onclick="closeM()">Close</button>
-                        <button type="submit" class="btn btn-primary" onclick="saveEditBook(event)">Save Changes</button>
+                        <button type="button" class="btn btn-secondary m-1" onclick="closeM()">Close</button>
+                        <button type="submit" class="btn btn-primary m-1" onclick="saveEditBook(event)">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -98,9 +98,9 @@
                         <p>No Books available</p>
                     <% } else { %>
                     <% books.forEach(book => { %>
-                        <div class="col-md-3">
+                        <div class="col-lg-3">
                             <div class="card text-center">
-                                <img src="/imagesdb/<%= book.Cover %>" alt="Book Cover"  height="500">
+                                <img src="/imagesdb/<%= book.Cover %>" class="card--img" alt="Book Cover"  height="500">
                                 <div class="card-body">
                                     <h5 class="card-title"><%= book.Title %></h5>
                                     <p class="card-text">Author: <%= book.Author %></p>

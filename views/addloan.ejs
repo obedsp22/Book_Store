@@ -1,33 +1,33 @@
 <div id="rentModal">
     <div id="rentBody">
         <h1 class="mt-4 text-center">Add Loan</h1>
-        <div>Loan Information</div>
+        <div class="text-center">Loan Information</div>
         <hr>
         <form id="rentForm">
             <div class="row">
-                <div class="form-group col-md">
+                <div class="form-group col-sm">
                     <label for="rentDt">Rent Date</label>
                     <input type="date" class="form-control" id="rentDT" required>
                 </div>
-                <div class="form-group col-md">
+                <div class="form-group col-sm">
                     <label for="return">Return Date</label>
                     <input type="date" class="form-control" id="returnDT" required>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md">
+                <div class="form-group col-sm">
                     <label for="Reader">Reader</label>
                     <select class="form-control" id="readers" required></select>
                 </div>
 
-                <div class="form-group col-md">
+                <div class="form-group col-sm">
                     <label for="Book">Book</label>
                     <select class="form-control" id="books" required></select>
                 </div>
             </div>
             <div class="mt-4">
-                <button type="button" class="btn btn-warning" onclick="addLoan(event)">Rent Book</button>
-                <button type="button" class="btn btn-secondary" onclick="closeLoan()">Close</button>
+                <button type="button" class="btn btn-warning m-1" onclick="addLoan(event)">Rent Book</button>
+                <button type="button" class="btn btn-secondary m-1" onclick="closeLoan()">Close</button>
             </div>
         </form>
     </div>

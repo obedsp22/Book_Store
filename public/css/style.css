@@ -64,7 +64,7 @@ nav {
 #main {
     background: url('/images/library.jpg') no-repeat center;
     background-size: cover;
-    height: 600px;
+    height: 100vh;
     position: relative;
 }
 
@@ -141,21 +141,19 @@ image {
 #allbooks {
     display: flex;
     flex-flow: row nowrap;
-    min-height: 900px;
+    min-height: 100vh;
 }
 
 aside {
-    flex: 2;
+    flex: 1;
     padding: 50px;
-}
-
-.aside {
-    margin-left: 60px;
+    width: 100%;
 }
 
 #mainBooks {
-    flex: 10;
+    flex: 3;
     padding: 50px;
+    width: 100%;
 }
 
 .card {
@@ -172,4 +170,32 @@ aside {
     color: blue;
 }
 
-/* Container */
+
+@media screen and (max-width:600px) {
+    nav{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .navbar {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #allbooks {
+        flex-direction: column;
+    }
+    
+    aside {
+        text-align: center;
+    }
+
+    .aside ul {
+        list-style-type: none;
+    }
+}
